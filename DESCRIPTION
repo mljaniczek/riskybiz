@@ -1,11 +1,11 @@
-Package: riskybusiness
-Title: What the Package Does (One Line, Title Case)
+Package: riskybiz
+Title: Handy wrapper for cmprsk package
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Margie",
+           family = "Hannum",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
+           email = "margie.hannum@gmail.com",
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: What the package does (one paragraph).
 License: What license it uses
