@@ -7,17 +7,24 @@ Authors@R:
            role = c("aut", "cre"),
            email = "margie.hannum@gmail.com",
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: Wrapper functions for to make {cmprsk} package tidy and accessible.
+Description: Wrapper functions for to make {cmprsk} package tidy
+    and accessible.
 License: What license it uses
 URL: https://github.com/margarethannum/riskybiz
-BugReports: 
-    https://github.com/margarethannum/riskybiz/issues
+BugReports: https://github.com/margarethannum/riskybiz/issues
+Imports: 
+    cmprsk,
+    generics
+Suggests: 
+    covr,
+    dplyr,
+    gtsummary,
+    spelling,
+    tibble,
+    tidyr,
+    testthat (>= 2.1.0)
 Encoding: UTF-8
+Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
-Suggests: 
-    covr,
-    testthat,
-    spelling
-Language: en-US

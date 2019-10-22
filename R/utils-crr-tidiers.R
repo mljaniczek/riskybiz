@@ -30,7 +30,7 @@ as_broom_tibble <- function(data) {
   # TODO: error when there aren't column names?
 
   tryCatch(
-    df <- as_tibble(data),
+    df <- tibble::as_tibble(data),
 
     error = function(cnd)
       stop("Could not coerce data to `tibble`. Try explicitly passing a",
@@ -83,7 +83,7 @@ tidy.crr <- function(x, exponentiate = FALSE, conf.int = FALSE,
     ret <- cbind(ret, CI)
   }
 
-  as_tibble(ret)
+  tibble::as_tibble(ret)
 }
 
 
