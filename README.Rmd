@@ -16,6 +16,9 @@ knitr::opts_chunk$set(
 # riskybiz
 
 <!-- badges: start -->
+[![Travis build status](https://travis-ci.org/margarethannum/riskybiz.svg?branch=master)](https://travis-ci.org/margarethannum/riskybiz)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/margarethannum/riskybiz?branch=master&svg=true)](https://ci.appveyor.com/project/margarethannum/riskybiz)
+[![Codecov test coverage](https://codecov.io/gh/margarethannum/riskybiz/branch/master/graph/badge.svg)](https://codecov.io/gh/margarethannum/riskybiz?branch=master)
 <!-- badges: end -->
 
 The goal of {riskybiz} is to provide both a formula framework for creating competing risks regression objects and also output useful components such as `model.frame` that the original {cmprsk} package does not provide.
