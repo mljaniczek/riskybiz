@@ -5,9 +5,10 @@
 #' model.frame and formula in output) so that results can leverage functions
 #' like `broom::tidy` the same way other regression function results do.
 #'
-#' @param formula MODIFY
+#' @param formula input formula (e.g Surv(time, event) ~ var1 + var2). event
+#' variable can have multiple levels for use in competing risks.
 #' @param data MODIFY
-#' @param ... other arguments passed on to `cmprsk::crr`
+#' @param ... other arguments passed on to `cmprsk::crr` (e.g. `cencode`, `failcode`)
 #'
 #'
 
@@ -40,10 +41,11 @@ crr.formula <- function(formula, data, ...){
   # if (indx[1] == 0) stop("A formula argument is required, otherwise use
   #                        standard crr input")
 
-  tTerms <- terms(formula, specials = NULL, data = data)
-  ftime_term <- tTerms[[2]][[2]]
-  fstatus_term <- tTerms[[2]][[3]]
-  form <- tTerms[[3]]
+  # get terms from formula
+  Terms <- terms(formula, specials = NULL, data = data)
+  ftime_term <- Terms[[2]][[2]]
+  fstatus_term <- Terms[[2]][[3]]
+  form <- Terms[[3]]
 
   # grab vectors for input to crr
   ftime <- data[[ftime_term]]
@@ -57,8 +59,8 @@ crr.formula <- function(formula, data, ...){
              fstatus = fstatus,
              cov1 = cov1)
 
-  fit$terms <- tTerms
-  fit$formula <- formula(tTerms)
+  fit$terms <- Terms
+  fit$formula <- formula(Terms)
 
   return(fit)
 }

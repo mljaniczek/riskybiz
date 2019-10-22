@@ -2,3 +2,5 @@
 
 export(crr.default)
 export(crr.formula)
+export(tidy.crr)
+import(cmprsk)

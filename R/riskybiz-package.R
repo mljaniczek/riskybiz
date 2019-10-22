@@ -1,5 +1,5 @@
 #' @import cmprsk
-#' #' @keywords internal
+#' @keywords internal
 "_PACKAGE"
 
 

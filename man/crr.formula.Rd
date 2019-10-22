@@ -4,14 +4,15 @@
 \alias{crr.formula}
 \title{Competing risks functions}
 \usage{
-crr.formula(...)
+crr.formula(formula, data, ...)
 }
 \arguments{
-\item{...}{other arguments passed on to \code{cmprsk::crr}}
-
-\item{formula}{MODIFY}
+\item{formula}{input formula (e.g Surv(time, event) ~ var1 + var2). event
+variable can have multiple levels for use in competing risks.}
 
 \item{data}{MODIFY}
+
+\item{...}{other arguments passed on to \code{cmprsk::crr} (e.g. \code{cencode}, \code{failcode})}
 }
 \description{
 These functions override the \code{crr} function provided in {cmprsk}
