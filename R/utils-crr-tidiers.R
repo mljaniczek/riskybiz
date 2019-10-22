@@ -8,10 +8,6 @@ unrowname <- function(x) {
 }
 
 
-# remove NULL items in a vector or list
-# not exported from broom so had to replicate here
-compact <- function(x) Filter(Negate(is.null), x)
-
 #' Coerce a data frame to a tibble, preserving rownames
 #'
 #' A thin wrapper around [tibble::as_tibble()], except checks for

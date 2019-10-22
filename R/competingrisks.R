@@ -75,14 +75,52 @@ crr.formula <- function(formula, data, ...){
   cov1 <- stats::model.matrix(stats::as.formula(paste("~", deparse(form))), data)[, -1L]
 
 
+  ## extract data from the model formula and frame
+  if(missing(data)) data <- environment(formula)
+  mf <- match.call(expand.dots = FALSE)
+  m <- match(c("formula", "data", "subset", "na.action"), names(mf), 0L)
+  mf <- mf[c(1L, m)]
+  mf$drop.unused.levels <- TRUE
+  ## need stats:: for non-standard evaluation
+  mf[[1L]] <- quote(stats::model.frame)
+  mf <- eval(mf, parent.frame())
+  # if (method == "model.frame")
+  #   return(mf)
+
+
   fit <- cmprsk::crr(ftime=ftime,
              fstatus = fstatus,
              cov1 = cov1)
-
-  fit$terms <- Terms
-  fit$formula <- formula(Terms)
+  fit <- c(fit, list(
+    call = Call,
+    formula = formula(Terms),
+    terms = Terms,
+    data = data,
+    model = mf
+  ))
 
   return(fit)
+}
+
+#' @export
+model.frame.crr <- function (formula, ...)
+{
+  dots <- list(...)
+  nargs <- dots[match(c("data", "na.action", "subset"), names(dots), 0L)]
+  if (length(nargs) || is.null(formula$model)) {
+    fcall <- formula$call
+    m <- match(c("formula", "data", "subset", "na.action"), names(fcall), 0L)
+    fcall <- fcall[c(1L, m)]
+    fcall$drop.unused.levels <- TRUE
+    fcall$method <- "model.frame"
+    fcall[[1L]] <- quote(stats::model.frame)
+    fcall$formula <- stats::terms(formula)
+    fcall[names(nargs)] <- nargs
+    env <- environment(formula$terms)
+    if (is.null(env)) env <- parent.frame()
+    eval(fcall, env)
+  }
+  else formula$model
 }
 
 

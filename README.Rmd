@@ -20,6 +20,8 @@ library(dplyr)
 [![Travis build status](https://travis-ci.org/margarethannum/riskybiz.svg?branch=master)](https://travis-ci.org/margarethannum/riskybiz)
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/margarethannum/riskybiz?branch=master&svg=true)](https://ci.appveyor.com/project/margarethannum/riskybiz)
 [![Codecov test coverage](https://codecov.io/gh/margarethannum/riskybiz/branch/master/graph/badge.svg)](https://codecov.io/gh/margarethannum/riskybiz?branch=master)
+[![Lifecycle:
+maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
 
 The goal of {riskybiz} is to provide both a formula framework for creating competing risks regression objects and also output useful components such as `model.frame` that the original {cmprsk} package does not provide.
@@ -41,6 +43,7 @@ remotes::install_github("margarethannum/riskybiz")
 ```{r eval=FALSE}
 
 library(gtsummary)
+library(dplyr)
 library(cmprsk)
 
 set.seed(123)
@@ -53,13 +56,14 @@ covars <- model.matrix(~ age + factor(trt) + factor(grade), trial2)[,-1]
 ftime1 <- trial2$ttdeath
 fstatus1 <- trial2$grey
 mod_orig <- crr(ftime=ftime1,
-                fstatus = fstatus,
+                fstatus = fstatus1,
                 cov1 = covars)
 
 # using new wrapper function, accepts data and formula
 mod_new <- crr.formula(Surv(ttdeath, grey) ~ age + trt + grade, trial2)
+head(model.frame(mod_new))
+tidy(mod_new)
 
-tidy.crr(mod_new)
 ```
 
 
