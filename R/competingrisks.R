@@ -5,11 +5,33 @@
 #' model.frame and formula in output) so that results can leverage functions
 #' like `broom::tidy` the same way other regression function results do.
 #'
-#' @param formula input formula (e.g Surv(time, event) ~ var1 + var2). event
-#' variable can have multiple levels for use in competing risks.
-#' @param data MODIFY
+#' @param formula formula object with response on the left of a ~ operator
+#' and terms on the right. Event variable can have multiple levels for use in
+#' competing risks.
+#' @param data a data.frame in which to interpret the variables named in the
+#' `formula`
 #' @param ... other arguments passed on to `cmprsk::crr` (e.g. `cencode`, `failcode`)
+#' @examples
 #'
+#' library(gtsummary)
+#' library(cmprsk)
+#'
+#' set.seed(123)
+#' trial2 <- trial %>%
+#'   mutate(grey = sample(0:2, 200, replace = TRUE, prob = c(0.4, 0.5, 0.1))) %>%
+#'   drop_na()
+#'
+#'  #original crr
+#'  covars <- model.matrix(~ age + factor(trt) + factor(grade), trial2)[,-1]
+#'  ftime1 <- trial2$ttdeath
+#'  fstatus1 <- trial2$grey
+#'  mod_orig <- crr(ftime=ftime1,
+#'           fstatus = fstatus,
+#'           cov1 = covars)
+#'
+#'  # using new wrapper function, accepts data and formula
+#'  mod_new <- crr.formula(Surv(ttdeath, grey) ~ age + trt + grade, trial2)
+
 #'
 
 
@@ -55,7 +77,7 @@ crr.formula <- function(formula, data, ...){
   cov1 <- model.matrix(as.formula(paste("~", deparse(form))), data)[, -1L]
 
 
-  fit <- crr(ftime=ftime,
+  fit <- cmprsk::crr(ftime=ftime,
              fstatus = fstatus,
              cov1 = cov1)
 

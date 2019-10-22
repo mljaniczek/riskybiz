@@ -7,10 +7,12 @@
 crr.formula(formula, data, ...)
 }
 \arguments{
-\item{formula}{input formula (e.g Surv(time, event) ~ var1 + var2). event
-variable can have multiple levels for use in competing risks.}
+\item{formula}{formula object with response on the left of a ~ operator
+and terms on the right. Event variable can have multiple levels for use in
+competing risks.}
 
-\item{data}{MODIFY}
+\item{data}{a data.frame in which to interpret the variables named in the
+\code{formula}}
 
 \item{...}{other arguments passed on to \code{cmprsk::crr} (e.g. \code{cencode}, \code{failcode})}
 }
@@ -19,4 +21,26 @@ These functions override the \code{crr} function provided in {cmprsk}
 to produce more manageable competing risks model results (i.e. include
 model.frame and formula in output) so that results can leverage functions
 like \code{broom::tidy} the same way other regression function results do.
+}
+\examples{
+
+library(gtsummary)
+library(cmprsk)
+
+set.seed(123)
+trial2 <- trial \%>\%
+  mutate(grey = sample(0:2, 200, replace = TRUE, prob = c(0.4, 0.5, 0.1))) \%>\%
+  drop_na()
+
+ #original crr
+ covars <- model.matrix(~ age + factor(trt) + factor(grade), trial2)[,-1]
+ ftime1 <- trial2$ttdeath
+ fstatus1 <- trial2$grey
+ mod_orig <- crr(ftime=ftime1,
+          fstatus = fstatus,
+          cov1 = covars)
+
+ # using new wrapper function, accepts data and formula
+ mod_new <- crr.formula(Surv(ttdeath, grey) ~ age + trt + grade, trial2)
+
 }

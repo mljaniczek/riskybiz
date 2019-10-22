@@ -7,11 +7,12 @@ Authors@R:
            role = c("aut", "cre"),
            email = "margie.hannum@gmail.com",
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+Description: Wrapper functions for to make {cmprsk} package tidy and accessible.
 License: What license it uses
+URL: https://github.com/margarethannum/riskybiz
+BugReports: 
+    https://github.com/margarethannum/riskybiz/issues
 Encoding: UTF-8
 LazyData: true
-URL: https://github.com/margarethannum/riskybusiness
-BugReports: https://github.com/margarethannum/riskybusiness/issues
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1

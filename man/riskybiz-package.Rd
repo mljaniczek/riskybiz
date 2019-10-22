@@ -6,13 +6,13 @@
 \alias{riskybiz-package}
 \title{riskybiz: Handy wrapper for cmprsk package}
 \description{
-What the package does (one paragraph).
+Wrapper functions for to make {cmprsk} package tidy and accessible.
 }
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/margarethannum/riskybusiness}
-  \item Report bugs at \url{https://github.com/margarethannum/riskybusiness/issues}
+  \item \url{https://github.com/margarethannum/riskybiz}
+  \item Report bugs at \url{https://github.com/margarethannum/riskybiz/issues}
 }
 
 }
