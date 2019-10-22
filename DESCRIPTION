@@ -2,19 +2,26 @@ Package: riskybiz
 Title: Handy wrapper for cmprsk package
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "Margie",
+    c(person(given = "Margie",
            family = "Hannum",
            role = c("aut", "cre"),
            email = "margie.hannum@gmail.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+           comment = c(ORCID = "0000-0002-2953-0449")),
+      person(given = "Daniel D.",
+           family = "Sjoberg",
+           role = c("aut"),
+           email = "danield.sjoberg@gmail.com",
+           comment = c(ORCID = "0000-0003-0862-2018"))
+           )
 Description: Wrapper functions for to make {cmprsk} package tidy
     and accessible.
-License: What license it uses
+License: MIT + file LICENSE
 URL: https://github.com/margarethannum/riskybiz
 BugReports: https://github.com/margarethannum/riskybiz/issues
 Imports: 
     cmprsk,
-    generics
+    generics,
+    magrittr
 Suggests: 
     covr,
     dplyr,
@@ -22,9 +29,12 @@ Suggests:
     spelling,
     tibble,
     tidyr,
-    testthat (>= 2.1.0)
+    testthat (>= 2.1.0),
+    knitr,
+    rmarkdown
 Encoding: UTF-8
 Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
+VignetteBuilder: knitr

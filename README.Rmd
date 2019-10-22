@@ -11,6 +11,7 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
+library(dplyr)
 ```
 
 # riskybiz
@@ -62,12 +63,8 @@ tidy.crr(mod_new)
 ```
 
 
-<!-- ## Installation -->
+## Contributing
 
-<!-- You can install the development version from [GitHub](https://github.com/) with: -->
-
-<!-- ``` r -->
-<!-- # install.packages("devtools") -->
-<!-- devtools::install_github("margarethannum/riskybusiness") -->
-<!-- ``` -->
+Please note that the {riskybiz} project is released with a [Contributor Code of Conduct](http://www.danieldsjoberg.com/gtsummary/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms. A big thank you to all contributors!  
+`r usethis::use_tidy_thanks(from = "1970-01-01") %>% {glue::glue("[&#x0040;{.}](https://github.com/{.})")} %>% glue::glue_collapse(sep = ", ", last = ", and ")`
 

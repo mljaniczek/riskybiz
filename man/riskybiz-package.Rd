@@ -18,7 +18,12 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Margie Hannum \email{margie.hannum@gmail.com} (YOUR-ORCID-ID)
+\strong{Maintainer}: Margie Hannum \email{margie.hannum@gmail.com} (0000-0002-2953-0449)
+
+Authors:
+\itemize{
+  \item Daniel D. Sjoberg \email{danield.sjoberg@gmail.com} (0000-0003-0862-2018)
+}
 
 }
 \keyword{internal}

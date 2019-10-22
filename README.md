@@ -56,14 +56,12 @@ mod_new <- crr.formula(Surv(ttdeath, grey) ~ age + trt + grade, trial2)
 tidy.crr(mod_new)
 ```
 
-<!-- ## Installation -->
+## Contributing
 
-<!-- You can install the development version from [GitHub](https://github.com/) with: -->
-
-<!-- ``` r -->
-
-<!-- # install.packages("devtools") -->
-
-<!-- devtools::install_github("margarethannum/riskybusiness") -->
-
-<!-- ``` -->
+Please note that the {riskybiz} project is released with a [Contributor
+Code of
+Conduct](http://www.danieldsjoberg.com/gtsummary/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms. A big
+thank you to all contributors\!  
+[@ddsjoberg](https://github.com/ddsjoberg), and
+[@margarethannum](https://github.com/margarethannum)
