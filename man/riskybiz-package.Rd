@@ -6,7 +6,8 @@
 \alias{riskybiz-package}
 \title{riskybiz: Handy wrapper for cmprsk package}
 \description{
-Wrapper functions for to make {cmprsk} package tidy and accessible.
+Wrapper functions for to make {cmprsk} package tidy
+    and accessible.
 }
 \seealso{
 Useful links:

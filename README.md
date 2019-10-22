@@ -5,6 +5,12 @@
 
 <!-- badges: start -->
 
+[![Travis build
+status](https://travis-ci.org/margarethannum/riskybiz.svg?branch=master)](https://travis-ci.org/margarethannum/riskybiz)
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/margarethannum/riskybiz?branch=master&svg=true)](https://ci.appveyor.com/project/margarethannum/riskybiz)
+[![Codecov test
+coverage](https://codecov.io/gh/margarethannum/riskybiz/branch/master/graph/badge.svg)](https://codecov.io/gh/margarethannum/riskybiz?branch=master)
 <!-- badges: end -->
 
 The goal of {riskybiz} is to provide both a formula framework for
@@ -34,7 +40,7 @@ library(cmprsk)
 set.seed(123)
 trial2 <- trial %>%
 mutate(grey = sample(0:2, 200, replace = TRUE, prob = c(0.4, 0.5, 0.1))) %>%
-   drop_na()
+   tidyr::drop_na()
 
 #original crr
 covars <- model.matrix(~ age + factor(trt) + factor(grade), trial2)[,-1]
