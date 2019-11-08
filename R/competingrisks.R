@@ -91,13 +91,18 @@ crr.formula <- function(formula, data, ...){
   fit <- cmprsk::crr(ftime=ftime,
              fstatus = fstatus,
              cov1 = cov1)
-  fit <- c(fit, list(
-    call = Call,
-    formula = formula(Terms),
-    terms = Terms,
-    data = data,
-    model = mf
-  ))
+  fit$call = Call
+  fit$formula = formula(Terms)
+  fit$data = data
+  fit$model = mf
+  # fit <- c(fit, list(
+  #   call = Call,
+  #   formula = formula(Terms),
+  #   terms = Terms,
+  #   data = data,
+  #   model = mf
+  # )
+  #)
 
   return(fit)
 }

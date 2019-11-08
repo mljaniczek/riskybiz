@@ -39,12 +39,14 @@ remotes::install_github("margarethannum/riskybiz")
 
 # Example
 
+The standard `cmprsk::crr()` function has specific input requirements. 
 
-```{r eval=FALSE}
+```{r eval=TRUE}
 
 library(gtsummary)
 library(dplyr)
 library(cmprsk)
+library(riskybiz)
 
 set.seed(123)
 trial2 <- trial %>%
@@ -58,6 +60,19 @@ fstatus1 <- trial2$grey
 mod_orig <- crr(ftime=ftime1,
                 fstatus = fstatus1,
                 cov1 = covars)
+
+```
+
+Output of model does not contain elements like `model.frame` since the function does not take a `data.frame` as input. 
+
+```{r}
+summary(mod_orig)
+```
+
+
+Using our wrapper function `riskybiz::crr.formula()` allows for inputting an intuitive formula and data, which allows for downstream functions. 
+
+```{r}
 
 # using new wrapper function, accepts data and formula
 mod_new <- crr.formula(Surv(ttdeath, grey) ~ age + trt + grade, trial2)
