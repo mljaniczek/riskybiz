@@ -66,6 +66,7 @@ tidy.crr <- function(x, exponentiate = FALSE, conf.int = FALSE,
   co <- s$coef
   nn <- c("estimate", "std.error", "statistic", "p.value")
   ret <- as_broom_tibble(co[, -2, drop = FALSE])
+  colnames(ret)[-1] <- nn
 
   if (exponentiate) {
     ret$estimate <- exp(ret$estimate)
