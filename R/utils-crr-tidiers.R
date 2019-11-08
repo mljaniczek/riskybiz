@@ -50,7 +50,7 @@ has_rownames <- function(df) {
 
 #' @export
 
-tidy.crr <- function(x, exponentiate = FALSE, conf.int = FALSE,
+tidy.crr <- function(x, exponentiate = FALSE, conf.int = TRUE,
                        conf.level = .95, ...) {
   # backward compatibility (in previous version, conf.int was used instead of conf.level)
   if (is.numeric(conf.int)) {
@@ -64,9 +64,9 @@ tidy.crr <- function(x, exponentiate = FALSE, conf.int = FALSE,
     s <- summary(x, conf.int = FALSE)
   }
   co <- s$coef
-  nn <- c("estimate", "std.error", "statistic", "p.value")
+  nn <- c("term", "estimate", "std.error", "statistic", "p.value")
   ret <- as_broom_tibble(co[, -2, drop = FALSE])
-  colnames(ret)[-1] <- nn
+  colnames(ret) <- nn
 
   if (exponentiate) {
     ret$estimate <- exp(ret$estimate)
