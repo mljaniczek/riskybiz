@@ -73,7 +73,7 @@ Using our wrapper function `riskybiz::crr.formula()` allows for inputting an int
 ```{r}
 
 # using new wrapper function, accepts data and formula
-mod_new <- crr.formula(Surv(ttdeath, grey) ~ age + trt + grade, trial2)
+mod_new <- crr(Surv(ttdeath, grey) ~ age + trt + grade, trial2)
 head(model.frame(mod_new))
 tidy(mod_new)
 

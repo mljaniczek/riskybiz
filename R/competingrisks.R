@@ -30,8 +30,14 @@
 #'           cov1 = covars)
 #'
 #'  # using new wrapper function, accepts data and formula
-#'  mod_new <- crr.formula(Surv(ttdeath, grey) ~ age + trt + grade, trial2)
+#'  mod_new <- crr(Surv(ttdeath, grey) ~ age + trt + grade, trial2)
 NULL
+
+#' @rdname crr
+#' @export
+crr <- function(x, ...) {
+  UseMethod("inline_text")
+}
 
 #' @rdname crr
 #' @export

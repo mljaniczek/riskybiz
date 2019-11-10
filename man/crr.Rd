@@ -6,19 +6,21 @@
 \alias{crr.default}
 \title{Competing risks functions}
 \usage{
-crr.formula(formula, data, ...)
+crr(x, ...)
 
-crr.default(...)
+\method{crr}{formula}(formula, data, ...)
+
+\method{crr}{default}(...)
 }
 \arguments{
+\item{...}{other arguments passed on to \code{cmprsk::crr} (e.g. \code{cencode}, \code{failcode})}
+
 \item{formula}{formula object with response on the left of a ~ operator
 and terms on the right. Event variable can have multiple levels for use in
 competing risks.}
 
 \item{data}{a data.frame in which to interpret the variables named in the
 \code{formula}}
-
-\item{...}{other arguments passed on to \code{cmprsk::crr} (e.g. \code{cencode}, \code{failcode})}
 }
 \description{
 These functions override the \code{crr} function provided in {cmprsk}
@@ -44,5 +46,5 @@ trial2 <- trial \%>\%
           cov1 = covars)
 
  # using new wrapper function, accepts data and formula
- mod_new <- crr.formula(Surv(ttdeath, grey) ~ age + trt + grade, trial2)
+ mod_new <- crr(Surv(ttdeath, grey) ~ age + trt + grade, trial2)
 }
