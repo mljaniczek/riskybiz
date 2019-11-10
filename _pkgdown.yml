@@ -1,1 +1,22 @@
-destination: docs
+url: https://margarethannum.github.io/riskybiz/
+
+template:
+  params:
+    bootswatch: flatly
+
+authors:
+  Margie Hannum:
+    href: "http://margarethannum.github.io/"
+  Daniel D. Sjoberg:
+    href: "http://www.danieldsjoberg.com/"
+
+navbar:
+  type: default
+  left:
+  - icon: fa-home
+    href: index.html
+  - text: Reference
+    href: reference/index.html
+  right:
+  - icon: fa-github fa-lg
+    href: https://github.com/margarethannum/riskybiz
