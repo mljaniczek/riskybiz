@@ -6,14 +6,73 @@
 \alias{crr.default}
 \title{Competing risks functions}
 \usage{
-crr(x, ...)
+crr(...)
 
 \method{crr}{formula}(formula, data, ...)
 
 \method{crr}{default}(...)
 }
 \arguments{
-\item{...}{other arguments passed on to \code{cmprsk::crr} (e.g. \code{cencode}, \code{failcode})}
+\item{...}{Arguments passed on to \code{cmprsk::crr}
+\describe{
+  \item{ftime}{
+vector of failure/censoring times
+}
+  \item{fstatus}{
+vector with a unique code for each failure type and a separate code for
+censored observations 
+}
+  \item{cov1}{
+matrix (nobs x ncovs) of fixed covariates (either cov1, cov2, or both
+are required)
+}
+  \item{cov2}{
+matrix of covariates that will be multiplied by functions of time; 
+if used, often these covariates would also appear in cov1
+to give a prop hazards effect plus a time interaction
+}
+  \item{tf}{
+functions of time.  A function that takes a vector of times as
+an argument and returns a matrix whose jth column is the value of 
+the time function corresponding to the jth column of cov2 evaluated
+at the input time vector.  At time \code{tk}, the
+model includes the term \code{cov2[,j]*tf(tk)[,j]} as a covariate.
+}
+  \item{cengroup}{
+vector with different values for each group with 
+a distinct censoring distribution (the censoring distribution
+is estimated separately within these groups).  All data in one group, if
+missing. 
+}
+  \item{failcode}{
+code of fstatus that denotes the failure type of interest
+}
+  \item{cencode}{
+code of fstatus that denotes censored observations
+}
+  \item{subset}{
+  a logical vector specifying a subset of cases to include in the
+  analysis
+}
+  \item{na.action}{
+  a function specifying the action to take for any cases missing any of
+  ftime, fstatus, cov1, cov2, cengroup, or subset.
+}
+  \item{gtol}{
+  iteration stops when a function of the gradient is \code{< gtol}
+}
+  \item{maxiter}{
+maximum number of iterations in Newton algorithm (0 computes
+scores and var at \code{init}, but performs no iterations)
+}
+  \item{init}{
+  initial values of regression parameters (default=all 0)
+}
+  \item{variance}{
+  If \code{FALSE}, then suppresses computation of the variance estimate
+  and residuals 
+}
+}}
 
 \item{formula}{formula object with response on the left of a ~ operator
 and terms on the right. Event variable can have multiple levels for use in

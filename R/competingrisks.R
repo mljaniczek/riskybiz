@@ -10,7 +10,7 @@
 #' competing risks.
 #' @param data a data.frame in which to interpret the variables named in the
 #' `formula`
-#' @param ... other arguments passed on to `cmprsk::crr` (e.g. `cencode`, `failcode`)
+#' @inheritDotParams cmprsk::crr
 #' @name crr
 #' @examples
 #'
@@ -35,8 +35,8 @@ NULL
 
 #' @rdname crr
 #' @export
-crr <- function(x, ...) {
-  UseMethod("inline_text")
+crr <- function(...) {
+  UseMethod("crr")
 }
 
 #' @rdname crr

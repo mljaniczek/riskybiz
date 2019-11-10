@@ -41,6 +41,11 @@ library(dplyr)
 library(cmprsk)
 #> Loading required package: survival
 library(riskybiz)
+#> 
+#> Attaching package: 'riskybiz'
+#> The following object is masked from 'package:cmprsk':
+#> 
+#>     crr
 
 set.seed(123)
 trial2 <- trial %>%
@@ -64,7 +69,7 @@ summary(mod_orig)
 #> Competing Risks Regression
 #> 
 #> Call:
-#> crr(ftime = ftime1, fstatus = fstatus1, cov1 = covars)
+#> cmprsk::crr(ftime = ..1, fstatus = ..2, cov1 = ..3)
 #> 
 #>                      coef exp(coef) se(coef)     z p-value
 #> age                0.0106      1.01  0.00618 1.714   0.086
@@ -83,14 +88,13 @@ summary(mod_orig)
 #> Pseudo likelihood ratio test = 3.07  on 4 df,
 ```
 
-Using our wrapper function `riskybiz::crr.formula()` allows for
-inputting an intuitive formula and data, which allows for downstream
-functions.
+Using our wrapper function `riskybiz::crr()` allows for inputting an
+intuitive formula and data, which allows for downstream functions.
 
 ``` r
 
 # using new wrapper function, accepts data and formula
-mod_new <- crr.formula(Surv(ttdeath, grey) ~ age + trt + grade, trial2)
+mod_new <- crr(Surv(ttdeath, grey) ~ age + trt + grade, trial2)
 #> Warning in Surv(ttdeath, grey): Invalid status value, converted to NA
 head(model.frame(mod_new))
 #>    Surv(ttdeath, grey) age     trt grade

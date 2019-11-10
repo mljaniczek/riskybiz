@@ -68,7 +68,7 @@ summary(mod_orig)
 ```
 
 
-Using our wrapper function `riskybiz::crr.formula()` allows for inputting an intuitive formula and data, which allows for downstream functions. 
+Using our wrapper function `riskybiz::crr()` allows for inputting an intuitive formula and data, which allows for downstream functions. 
 
 ```{r}
 
