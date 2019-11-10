@@ -20,8 +20,5 @@ sudo: false
 cache: packages
 warnings_are_errors: false
 
-r_github_packages:
-  - rstudio/gt
-
 after_success:
   - Rscript -e 'covr::codecov()'
