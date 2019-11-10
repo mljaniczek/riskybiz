@@ -14,7 +14,6 @@
 #' @name crr
 #' @examples
 #'
-#' library(gtsummary)
 #' library(cmprsk)
 #'
 #' set.seed(123)

@@ -28,7 +28,6 @@ like \code{broom::tidy} the same way other regression function results do.
 }
 \examples{
 
-library(gtsummary)
 library(cmprsk)
 
 set.seed(123)

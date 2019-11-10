@@ -38,7 +38,6 @@ The standard `cmprsk::crr()` function has specific input requirements.
 
 ``` r
 
-library(gtsummary)
 library(dplyr)
 library(cmprsk)
 #> Loading required package: survival
