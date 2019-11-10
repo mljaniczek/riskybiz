@@ -43,7 +43,6 @@ The standard `cmprsk::crr()` function has specific input requirements.
 
 ```{r eval=TRUE}
 library(dplyr)
-library(cmprsk)
 library(riskybiz)
 
 set.seed(123)

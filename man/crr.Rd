@@ -88,9 +88,6 @@ model.frame and formula in output) so that results can leverage functions
 like \code{broom::tidy} the same way other regression function results do.
 }
 \examples{
-
-library(cmprsk)
-
 set.seed(123)
 trial2 <- trial \%>\%
   dplyr::mutate(grey = sample(0:2, 200, replace = TRUE, prob = c(0.4, 0.5, 0.1))) \%>\%
