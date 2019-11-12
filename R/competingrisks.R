@@ -32,7 +32,7 @@ NULL
 
 #' @rdname crr
 #' @export
-crr <- function(...) {
+crr <- function(formula, data, ...) {
   UseMethod("crr")
 }
 

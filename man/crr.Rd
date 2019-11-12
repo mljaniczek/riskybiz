@@ -6,13 +6,20 @@
 \alias{crr.default}
 \title{Competing risks functions}
 \usage{
-crr(...)
+crr(formula, data, ...)
 
 \method{crr}{formula}(formula, data, ...)
 
 \method{crr}{default}(...)
 }
 \arguments{
+\item{formula}{formula object with response on the left of a ~ operator
+and terms on the right. Event variable can have multiple levels for use in
+competing risks.}
+
+\item{data}{a data.frame in which to interpret the variables named in the
+\code{formula}}
+
 \item{...}{Arguments passed on to \code{cmprsk::crr}
 \describe{
   \item{ftime}{
@@ -73,13 +80,6 @@ scores and var at \code{init}, but performs no iterations)
   and residuals 
 }
 }}
-
-\item{formula}{formula object with response on the left of a ~ operator
-and terms on the right. Event variable can have multiple levels for use in
-competing risks.}
-
-\item{data}{a data.frame in which to interpret the variables named in the
-\code{formula}}
 }
 \description{
 These functions override the \code{crr} function provided in {cmprsk}
