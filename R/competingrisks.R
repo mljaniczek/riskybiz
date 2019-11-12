@@ -13,21 +13,19 @@
 #' @inheritDotParams cmprsk::crr
 #' @name crr
 #' @examples
-#' set.seed(123)
-#' trial2 <- trial %>%
-#'   dplyr::mutate(grey = sample(0:2, 200, replace = TRUE, prob = c(0.4, 0.5, 0.1))) %>%
-#'   tidyr::drop_na()
+#'
+#' trial <- na.omit(trial)
 #'
 #'  #original crr
-#'  covars <- model.matrix(~ age + factor(trt) + factor(grade), trial2)[,-1]
-#'  ftime1 <- trial2$ttdeath
-#'  fstatus1 <- trial2$grey
+#'  covars <- model.matrix(~ age + factor(trt) + factor(grade), trial)[,-1]
+#'  ftime1 <- trial$ttdeath
+#'  fstatus1 <- trial$death_cr
 #'  mod_orig <- crr(ftime=ftime1,
 #'           fstatus = fstatus1,
 #'           cov1 = covars)
 #'
 #'  # using new wrapper function, accepts data and formula
-#'  mod_new <- crr(Surv(ttdeath, grey) ~ age + trt + grade, trial2)
+#'  mod_new <- crr(Surv(ttdeath, death_cr) ~ age + trt + grade, trial)
 NULL
 
 #' @rdname crr

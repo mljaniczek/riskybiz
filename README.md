@@ -37,25 +37,20 @@ remotes::install_github("margarethannum/riskybiz")
 The standard `cmprsk::crr()` function has specific input requirements.
 
 ``` r
-library(dplyr)
-library(cmprsk)
-#> Loading required package: survival
 library(riskybiz)
+#> Loading required package: cmprsk
+#> Loading required package: survival
 #> 
 #> Attaching package: 'riskybiz'
 #> The following object is masked from 'package:cmprsk':
 #> 
 #>     crr
 
-set.seed(123)
-trial2 <- trial %>%
-mutate(grey = sample(0:2, 200, replace = TRUE, prob = c(0.4, 0.5, 0.1))) %>%
-   tidyr::drop_na()
-
+trial <- na.omit(trial)
 #original crr
-covars <- model.matrix(~ age + factor(trt) + factor(grade), trial2)[,-1]
-ftime1 <- trial2$ttdeath
-fstatus1 <- trial2$grey
+covars <- model.matrix(~ age + factor(trt) + factor(grade), trial)[,-1]
+ftime1 <- trial$ttdeath
+fstatus1 <- trial$death_cr
 mod_orig <- crr(ftime=ftime1,
                 fstatus = fstatus1,
                 cov1 = covars)
@@ -71,21 +66,21 @@ summary(mod_orig)
 #> Call:
 #> cmprsk::crr(ftime = ..1, fstatus = ..2, cov1 = ..3)
 #> 
-#>                      coef exp(coef) se(coef)     z p-value
-#> age                0.0106      1.01  0.00618 1.714   0.086
-#> factor(trt)Placebo 0.0891      1.09  0.18702 0.477   0.630
-#> factor(grade)II    0.1396      1.15  0.22098 0.632   0.530
-#> factor(grade)III   0.2287      1.26  0.21811 1.049   0.290
+#>                         coef exp(coef) se(coef)       z p-value
+#> age                 5.27e-05     1.000  0.00599  0.0088    0.99
+#> factor(trt)Placebo -1.15e-01     0.892  0.17919 -0.6404    0.52
+#> factor(grade)II    -1.01e-01     0.904  0.23149 -0.4368    0.66
+#> factor(grade)III    2.96e-01     1.345  0.20284  1.4606    0.14
 #> 
 #>                    exp(coef) exp(-coef)  2.5% 97.5%
-#> age                     1.01      0.989 0.998  1.02
-#> factor(trt)Placebo      1.09      0.915 0.758  1.58
-#> factor(grade)II         1.15      0.870 0.746  1.77
-#> factor(grade)III        1.26      0.796 0.820  1.93
+#> age                    1.000      1.000 0.988  1.01
+#> factor(trt)Placebo     0.892      1.122 0.628  1.27
+#> factor(grade)II        0.904      1.106 0.574  1.42
+#> factor(grade)III       1.345      0.744 0.904  2.00
 #> 
 #> Num. cases = 173
-#> Pseudo Log-likelihood = -430 
-#> Pseudo likelihood ratio test = 3.07  on 4 df,
+#> Pseudo Log-likelihood = -434 
+#> Pseudo likelihood ratio test = 2.87  on 4 df,
 ```
 
 Using our wrapper function `riskybiz::crr()` allows for inputting an
@@ -94,24 +89,24 @@ intuitive formula and data, which allows for downstream functions.
 ``` r
 
 # using new wrapper function, accepts data and formula
-mod_new <- crr(Surv(ttdeath, grey) ~ age + trt + grade, trial2)
-#> Warning in Surv(ttdeath, grey): Invalid status value, converted to NA
+mod_new <- crr(Surv(ttdeath, death_cr) ~ age + trt + grade, trial)
+#> Warning in Surv(ttdeath, death_cr): Invalid status value, converted to NA
 head(model.frame(mod_new))
-#>    Surv(ttdeath, grey) age     trt grade
-#> 1               24.00+  23 Placebo    II
-#> 3               24.00+  31 Placebo    II
-#> 4                16.43  51 Placebo   III
-#> 5               15.64+  39    Drug     I
-#> 9               10.53+  34    Drug     I
-#> 10               24.00  42    Drug   III
+#>    Surv(ttdeath, death_cr) age     trt grade
+#> 1                   24.00+  23 Placebo    II
+#> 2                   24.00+   9    Drug     I
+#> 3                    24.00  31 Placebo    II
+#> 6                   15.64+  39    Drug     I
+#> 10                  10.53+  34    Drug     I
+#> 11                  24.00+  42    Drug   III
 tidy(mod_new)
 #> # A tibble: 4 x 7
-#>   term       estimate std.error statistic p.value conf.low conf.high
-#>   <chr>         <dbl>     <dbl>     <dbl>   <dbl>    <dbl>     <dbl>
-#> 1 age          0.0106   0.00618     1.71    0.086 -0.00152    0.0227
-#> 2 trtPlacebo   0.0891   0.187       0.477   0.63  -0.277      0.456 
-#> 3 gradeII      0.140    0.221       0.632   0.53  -0.294      0.573 
-#> 4 gradeIII     0.229    0.218       1.05    0.290 -0.199      0.656
+#>   term         estimate std.error statistic p.value conf.low conf.high
+#>   <chr>           <dbl>     <dbl>     <dbl>   <dbl>    <dbl>     <dbl>
+#> 1 age         0.0000527   0.00599   0.00880    0.99  -0.0117    0.0118
+#> 2 trtPlacebo -0.115       0.179    -0.640      0.52  -0.466     0.236 
+#> 3 gradeII    -0.101       0.231    -0.437      0.66  -0.555     0.353 
+#> 4 gradeIII    0.296       0.203     1.46       0.14  -0.101     0.694
 ```
 
 ## Contributing
@@ -120,4 +115,6 @@ Please note that the {riskybiz} project is released with a [Contributor
 Code of
 Conduct](https://github.com/margarethannum/riskybiz/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms. A big
-thank you to all contributors\!
+thank you to all contributors\!  
+[@ddsjoberg](https://github.com/ddsjoberg), and
+[@margarethannum](https://github.com/margarethannum)

@@ -14,6 +14,7 @@
 \item{response}{Tumor Response}
 \item{death}{Patient Died}
 \item{ttdeath}{Months to Death/Censor}
+\item{death_cr}{Death status (Competing Risks)}
 }}
 \usage{
 trial
