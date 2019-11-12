@@ -25,7 +25,8 @@ trial <-
   dplyr::mutate(
     age = ifelse(runif(n) < 0.95, age, NA_real_),
     marker = ifelse(runif(n) < 0.95, marker, NA_real_),
-    response = ifelse(runif(n) < 0.95, response, NA_integer_)
+    response = ifelse(runif(n) < 0.95, response, NA_integer_),
+    death_cr = sample(0:2, 200, replace = TRUE, prob = c(0.4, 0.5, 0.1))
   ) %>%
   dplyr::select(-dplyr::one_of("response_prob", "ttdeath_true"))
 summary(trial)
@@ -38,5 +39,6 @@ attr(trial$grade, "label") <- "Grade"
 attr(trial$response, "label") <- "Tumor Response"
 attr(trial$death, "label") <- "Patient Died"
 attr(trial$ttdeath, "label") <- "Months to Death/Censor"
+attr(trial$death_cr, "label") <- "Death Status (Competing Risk)"
 
 usethis::use_data(trial, overwrite = TRUE)
