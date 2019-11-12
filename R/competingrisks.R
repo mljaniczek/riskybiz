@@ -141,7 +141,7 @@ model.matrix.crr <- function(object, data=NULL,
   if (is.null(data) && !is.null(object[['x']]))
     return(object[['x']]) #don't match "xlevels"
 
-  Terms <- delete.response(object$terms)
+  Terms <- stats::delete.response(object$terms)
   if (is.null(data)) mf <- stats::model.frame(object)
   else {
     if (is.null(attr(data, "terms")))
@@ -157,7 +157,7 @@ model.matrix.crr <- function(object, data=NULL,
   # else dropterms <- NULL
 
   #attr(Terms, "intercept") <- 1
-  stemp <- untangle.specials(Terms, 'strata', 1)
+  stemp <- survival::untangle.specials(Terms, 'strata', 1)
   hasinteractions <- FALSE
   dropterms <- NULL
   if (length(stemp$vars) > 0) {  #if there is a strata statement
@@ -173,7 +173,7 @@ model.matrix.crr <- function(object, data=NULL,
 
   if (length(dropterms)) {
     Terms2 <- Terms[ -dropterms]
-    X <- model.matrix(Terms2, mf, constrasts=contrast.arg)
+    X <- stats::model.matrix(Terms2, mf, constrasts=contrast.arg)
     # we want to number the terms wrt the original model matrix
     temp <- attr(X, "assign")
     shift <- sort(dropterms)
@@ -181,11 +181,11 @@ model.matrix.crr <- function(object, data=NULL,
     if (length(shift)==2) temp + 1*(shift[2] <= temp)
     attr(X, "assign") <- temp
   }
-  else X <- model.matrix(Terms, mf, contrasts=contrast.arg)
+  else X <- stats::model.matrix(Terms, mf, contrasts=contrast.arg)
 
   # drop the intercept after the fact, and also drop strata if necessary
   Xatt <- attributes(X)
-  if (hasinteractions) adrop <- c(0, untangle.specials(Terms, "strata")$terms)
+  if (hasinteractions) adrop <- c(0, survival::untangle.specials(Terms, "strata")$terms)
   else adrop <- 0
   xdrop <- Xatt$assign %in% adrop  #columns to drop (always the intercept)
   X <- X[, !xdrop, drop=FALSE]

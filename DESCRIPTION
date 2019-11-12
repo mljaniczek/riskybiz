@@ -23,7 +23,8 @@ Depends:
     cmprsk
 Imports: 
     generics,
-    magrittr
+    magrittr,
+    survival
 Suggests: 
     covr,
     dplyr,
