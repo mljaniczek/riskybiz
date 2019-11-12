@@ -1,0 +1,9 @@
+pandoc: '2.2'
+pkgdown: 1.4.1
+pkgdown_sha: ~
+articles:
+  riskybiz: riskybiz.html
+urls:
+  reference: https://margarethannum.github.io/riskybiz//reference
+  article: https://margarethannum.github.io/riskybiz//articles
+
