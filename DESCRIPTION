@@ -19,7 +19,7 @@ License: MIT + file LICENSE
 URL: https://github.com/margarethannum/riskybiz
 BugReports: https://github.com/margarethannum/riskybiz/issues
 Depends: 
-    R (>= 3.2),
+    R (>= 3.4),
     cmprsk
 Imports: 
     generics,
