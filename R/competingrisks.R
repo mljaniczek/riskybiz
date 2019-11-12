@@ -95,6 +95,7 @@ crr.formula <- function(formula, data, ...){
   fit$formula = formula(Terms)
   fit$data = data
   fit$model = mf
+  fit$terms = Terms
   # fit <- c(fit, list(
   #   call = Call,
   #   formula = formula(Terms),
@@ -126,6 +127,71 @@ model.frame.crr <- function (formula, ...)
     eval(fcall, env)
   }
   else formula$model
+}
+
+
+# first pass - taken STRAIGHT from coxph pretty much
+#' @export
+
+model.matrix.crr <- function(object, data=NULL,
+                               contrast.arg=object$contrasts, ...) {
+  #
+  # If the object has an "x" component, return it, unless a new
+  #   data set is given
+  if (is.null(data) && !is.null(object[['x']]))
+    return(object[['x']]) #don't match "xlevels"
+
+  Terms <- delete.response(object$terms)
+  if (is.null(data)) mf <- stats::model.frame(object)
+  else {
+    if (is.null(attr(data, "terms")))
+      mf <- stats::model.frame(Terms, data, xlev=object$xlevels)
+    else mf <- data  #assume "data" is already a model frame
+  }
+
+  # cluster <- attr(Terms, "specials")$cluster
+  # if (length(cluster)) {
+  #   temp <- untangle.specials(Terms, "cluster")
+  #   dropterms <- temp$terms
+  # }
+  # else dropterms <- NULL
+
+  #attr(Terms, "intercept") <- 1
+  stemp <- untangle.specials(Terms, 'strata', 1)
+  hasinteractions <- FALSE
+  dropterms <- NULL
+  if (length(stemp$vars) > 0) {  #if there is a strata statement
+    for (i in stemp$vars) {  #multiple strata terms are allowed
+      # The factors attr has one row for each variable in the frame, one
+      #   col for each term in the model.  Pick rows for each strata
+      #   var, and find if it participates in any interactions.
+      if (any(attr(Terms, 'order')[attr(Terms, "factors")[i,] >0] >1))
+        hasinteractions <- TRUE
+    }
+    if (!hasinteractions) dropterms <- stemp$terms
+  }
+
+  if (length(dropterms)) {
+    Terms2 <- Terms[ -dropterms]
+    X <- model.matrix(Terms2, mf, constrasts=contrast.arg)
+    # we want to number the terms wrt the original model matrix
+    temp <- attr(X, "assign")
+    shift <- sort(dropterms)
+    temp <- temp + 1*(shift[1] <= temp)
+    if (length(shift)==2) temp + 1*(shift[2] <= temp)
+    attr(X, "assign") <- temp
+  }
+  else X <- model.matrix(Terms, mf, contrasts=contrast.arg)
+
+  # drop the intercept after the fact, and also drop strata if necessary
+  Xatt <- attributes(X)
+  if (hasinteractions) adrop <- c(0, untangle.specials(Terms, "strata")$terms)
+  else adrop <- 0
+  xdrop <- Xatt$assign %in% adrop  #columns to drop (always the intercept)
+  X <- X[, !xdrop, drop=FALSE]
+  attr(X, "assign") <- Xatt$assign[!xdrop]
+  attr(X, "contrasts") <- Xatt$contrasts
+  X
 }
 
 
