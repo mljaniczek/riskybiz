@@ -10,13 +10,9 @@
 #' competing risks.
 #' @param data a data.frame in which to interpret the variables named in the
 #' `formula`
-#' @param ... other arguments passed on to `cmprsk::crr` (e.g. `cencode`, `failcode`)
+#' @inheritDotParams cmprsk::crr
 #' @name crr
 #' @examples
-#'
-#' library(gtsummary)
-#' library(cmprsk)
-#'
 #' set.seed(123)
 #' trial2 <- trial %>%
 #'   dplyr::mutate(grey = sample(0:2, 200, replace = TRUE, prob = c(0.4, 0.5, 0.1))) %>%
@@ -31,8 +27,14 @@
 #'           cov1 = covars)
 #'
 #'  # using new wrapper function, accepts data and formula
-#'  mod_new <- crr.formula(Surv(ttdeath, grey) ~ age + trt + grade, trial2)
+#'  mod_new <- crr(Surv(ttdeath, grey) ~ age + trt + grade, trial2)
 NULL
+
+#' @rdname crr
+#' @export
+crr <- function(formula, data, ...) {
+  UseMethod("crr")
+}
 
 #' @rdname crr
 #' @export
