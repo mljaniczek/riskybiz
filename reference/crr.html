@@ -148,36 +148,36 @@ competing risks.</p></td>
     <tr>
       <th>...</th>
       <td><p>Arguments passed on to <code><a href='https://rdrr.io/pkg/cmprsk/man/crr.html'>cmprsk::crr</a></code></p><dl class='dl-horizontal'>
-  <dt>ftime</dt><dd><p>vector of failure/censoring times</p></dd>
-  <dt>fstatus</dt><dd><p>vector with a unique code for each failure type and a separate code for
+    <dt><code>ftime</code></dt><dd><p>vector of failure/censoring times</p></dd>
+    <dt><code>fstatus</code></dt><dd><p>vector with a unique code for each failure type and a separate code for
 censored observations</p></dd>
-  <dt>cov1</dt><dd><p>matrix (nobs x ncovs) of fixed covariates (either cov1, cov2, or both
+    <dt><code>cov1</code></dt><dd><p>matrix (nobs x ncovs) of fixed covariates (either cov1, cov2, or both
 are required)</p></dd>
-  <dt>cov2</dt><dd><p>matrix of covariates that will be multiplied by functions of time; 
+    <dt><code>cov2</code></dt><dd><p>matrix of covariates that will be multiplied by functions of time; 
 if used, often these covariates would also appear in cov1
 to give a prop hazards effect plus a time interaction</p></dd>
-  <dt>tf</dt><dd><p>functions of time.  A function that takes a vector of times as
+    <dt><code>tf</code></dt><dd><p>functions of time.  A function that takes a vector of times as
 an argument and returns a matrix whose jth column is the value of 
 the time function corresponding to the jth column of cov2 evaluated
 at the input time vector.  At time <code>tk</code>, the
 model includes the term <code>cov2[,j]*tf(tk)[,j]</code> as a covariate.</p></dd>
-  <dt>cengroup</dt><dd><p>vector with different values for each group with 
+    <dt><code>cengroup</code></dt><dd><p>vector with different values for each group with 
 a distinct censoring distribution (the censoring distribution
 is estimated separately within these groups).  All data in one group, if
 missing.</p></dd>
-  <dt>failcode</dt><dd><p>code of fstatus that denotes the failure type of interest</p></dd>
-  <dt>cencode</dt><dd><p>code of fstatus that denotes censored observations</p></dd>
-  <dt>subset</dt><dd><p>a logical vector specifying a subset of cases to include in the
+    <dt><code>failcode</code></dt><dd><p>code of fstatus that denotes the failure type of interest</p></dd>
+    <dt><code>cencode</code></dt><dd><p>code of fstatus that denotes censored observations</p></dd>
+    <dt><code>subset</code></dt><dd><p>a logical vector specifying a subset of cases to include in the
   analysis</p></dd>
-  <dt>na.action</dt><dd><p>a function specifying the action to take for any cases missing any of
+    <dt><code>na.action</code></dt><dd><p>a function specifying the action to take for any cases missing any of
   ftime, fstatus, cov1, cov2, cengroup, or subset.</p></dd>
-  <dt>gtol</dt><dd><p>iteration stops when a function of the gradient is <code>&lt; gtol</code></p></dd>
-  <dt>maxiter</dt><dd><p>maximum number of iterations in Newton algorithm (0 computes
+    <dt><code>gtol</code></dt><dd><p>iteration stops when a function of the gradient is <code>&lt; gtol</code></p></dd>
+    <dt><code>maxiter</code></dt><dd><p>maximum number of iterations in Newton algorithm (0 computes
 scores and var at <code>init</code>, but performs no iterations)</p></dd>
-  <dt>init</dt><dd><p>initial values of regression parameters (default=all 0)</p></dd>
-  <dt>variance</dt><dd><p>If <code>FALSE</code>, then suppresses computation of the variance estimate
+    <dt><code>init</code></dt><dd><p>initial values of regression parameters (default=all 0)</p></dd>
+    <dt><code>variance</code></dt><dd><p>If <code>FALSE</code>, then suppresses computation of the variance estimate
   and residuals</p></dd>
-
+  
 </dl></td>
     </tr>
     </table>
