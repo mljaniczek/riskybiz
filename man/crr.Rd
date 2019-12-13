@@ -20,66 +20,67 @@ competing risks.}
 \item{data}{a data.frame in which to interpret the variables named in the
 \code{formula}}
 
-\item{...}{Arguments passed on to \code{cmprsk::crr}
-\describe{
-  \item{ftime}{
+\item{...}{
+  Arguments passed on to \code{\link[cmprsk:crr]{cmprsk::crr}}
+  \describe{
+    \item{\code{ftime}}{
 vector of failure/censoring times
 }
-  \item{fstatus}{
+    \item{\code{fstatus}}{
 vector with a unique code for each failure type and a separate code for
 censored observations 
 }
-  \item{cov1}{
+    \item{\code{cov1}}{
 matrix (nobs x ncovs) of fixed covariates (either cov1, cov2, or both
 are required)
 }
-  \item{cov2}{
+    \item{\code{cov2}}{
 matrix of covariates that will be multiplied by functions of time; 
 if used, often these covariates would also appear in cov1
 to give a prop hazards effect plus a time interaction
 }
-  \item{tf}{
+    \item{\code{tf}}{
 functions of time.  A function that takes a vector of times as
 an argument and returns a matrix whose jth column is the value of 
 the time function corresponding to the jth column of cov2 evaluated
 at the input time vector.  At time \code{tk}, the
 model includes the term \code{cov2[,j]*tf(tk)[,j]} as a covariate.
 }
-  \item{cengroup}{
+    \item{\code{cengroup}}{
 vector with different values for each group with 
 a distinct censoring distribution (the censoring distribution
 is estimated separately within these groups).  All data in one group, if
 missing. 
 }
-  \item{failcode}{
+    \item{\code{failcode}}{
 code of fstatus that denotes the failure type of interest
 }
-  \item{cencode}{
+    \item{\code{cencode}}{
 code of fstatus that denotes censored observations
 }
-  \item{subset}{
+    \item{\code{subset}}{
   a logical vector specifying a subset of cases to include in the
   analysis
 }
-  \item{na.action}{
+    \item{\code{na.action}}{
   a function specifying the action to take for any cases missing any of
   ftime, fstatus, cov1, cov2, cengroup, or subset.
 }
-  \item{gtol}{
+    \item{\code{gtol}}{
   iteration stops when a function of the gradient is \code{< gtol}
 }
-  \item{maxiter}{
+    \item{\code{maxiter}}{
 maximum number of iterations in Newton algorithm (0 computes
 scores and var at \code{init}, but performs no iterations)
 }
-  \item{init}{
+    \item{\code{init}}{
   initial values of regression parameters (default=all 0)
 }
-  \item{variance}{
+    \item{\code{variance}}{
   If \code{FALSE}, then suppresses computation of the variance estimate
   and residuals 
 }
-}}
+  }}
 }
 \description{
 These functions override the \code{crr} function provided in {cmprsk}

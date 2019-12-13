@@ -18,11 +18,11 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Margie Hannum \email{margie.hannum@gmail.com} (0000-0002-2953-0449)
+\strong{Maintainer}: Margie Hannum \email{margie.hannum@gmail.com} (\href{https://orcid.org/0000-0002-2953-0449}{ORCID})
 
 Authors:
 \itemize{
-  \item Daniel D. Sjoberg \email{danield.sjoberg@gmail.com} (0000-0003-0862-2018)
+  \item Daniel D. Sjoberg \email{danield.sjoberg@gmail.com} (\href{https://orcid.org/0000-0003-0862-2018}{ORCID})
 }
 
 }
