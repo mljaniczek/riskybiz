@@ -70,9 +70,9 @@ crr.formula <- function(formula, data, ...){
   # grab vectors for input to crr
   ftime <- data[[ftime_term]]
   fstatus <- data[[fstatus_term]]
-
+  #browser()
   # covariate matrix for crr
-  cov1 <- stats::model.matrix(stats::as.formula(paste("~", deparse(form))), data)[, -1L]
+  cov1 <- stats::model.matrix(stats::as.formula(paste("~", deparse(form))), data)[, -1L, drop = FALSE]
 
 
   ## extract data from the model formula and frame
