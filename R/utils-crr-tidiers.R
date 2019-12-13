@@ -83,4 +83,48 @@ tidy.crr <- function(x, exponentiate = FALSE, conf.int = TRUE,
   tibble::as_tibble(ret)
 }
 
+#' @export
+#' @seealso [glance()], [cmprsk::crr()]
+#' @family crr tidiers
+glance.crr <- function(x, ...) {
+  s <- summary(x)
+  # there's not much to work with in standard cmprsk::crr summary.
+  # I've pulled what we can... should we augment?
+  # hashed statistics are what are included in glance.coxph.
+  # There are currently no methods for AIC, BIC.
+  ret <- list(
 
+    #nevent = s$nevent,# no event in summary for the crr
+    statistic.log = s$logtest[1],
+    #p.value.log = s$logtest[3],# there's no p value for the crr logtest??
+    #r.squared = s$rsq[1],
+    #r.squared.max = s$rsq[2],
+   # concordance = s$concordance[1],
+    #std.error.concordance = s$concordance[2],
+    logLik = as.numeric(s$loglik),
+    #AIC = stats::AIC(x),
+    #BIC = stats::BIC(x),
+    nobs = s$n
+  )
+  ret <- as_tibble(purrr::compact(ret))
+  ret
+}
+
+#' @templateVar class crr
+#' @inherit tidy.crr params examples
+#'
+#' @export
+#' @seealso [augment()], [cmprsk::crr()]
+#' @family crr tidiers
+augment.coxph <- function(x, data = NULL, newdata = NULL,
+                          #type.predict = "lp",
+                          ...) {
+  if (is.null(data) && is.null(newdata)) {
+    stop("Must specify either `data` or `newdata` argument.", call. = FALSE)
+  }
+
+  augment_columns(x, data, newdata,
+                  #type.predict = type.predict,
+                  #type.residuals = type.residuals
+  )
+}
