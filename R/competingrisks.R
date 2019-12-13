@@ -83,7 +83,8 @@ crr.formula <- function(formula, data, ...){
   mf$drop.unused.levels <- TRUE
   ## need stats:: for non-standard evaluation
   mf[[1L]] <- quote(stats::model.frame)
-  mf <- eval(mf, parent.frame())
+  #browser()
+  mf <- suppressWarnings(eval(mf, parent.frame()))
   # if (method == "model.frame")
   #   return(mf)
 
